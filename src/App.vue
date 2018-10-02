@@ -1,20 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="nav">
+      <!-- <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> -->
+
+      <Menu :active-name="activeName">
+        <MenuItem name="/home" to="/home">Home</MenuItem>
+        <MenuItem name="/about" to="/about">About</MenuItem>
+        <MenuItem name="/login" to="/login">Login</MenuItem>
+        <MenuItem name="/admin" to="/admin">Admin</MenuItem>
+      </Menu>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  export default {
+    data () {
+      return {
+        activeName: this.$route.path
+      }
+    },
+    watch: {
+      '$route' () {
+        this.activeName = this.$route.path
+      }
+    }
   }
-}
 </script>
+
 
 <style>
 #app {
